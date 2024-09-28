@@ -1,0 +1,34 @@
+{
+  "name": "revanced-actions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pishangujeniya/revanced-actions.git"
+  },
+  "keywords": [
+    "revanced"
+  ],
+  "author": "Pishang Ujeniya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pishangujeniya/revanced-actions/issues"
+  },
+  "homepage": "https://github.com/pishangujeniya/revanced-actions#readme",
+  "devDependencies": {
+    "@types/axios": "^0.9.36",
+    "@types/node": "^22.7.4",
+    "@types/yargs": "^17.0.33",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "yargs": "^17.7.2"
+  }
+}

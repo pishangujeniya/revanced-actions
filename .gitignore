@@ -1,3 +1,7 @@
+.vscode
+dist
+*.apk
+
 # Logs
 logs
 *.log
