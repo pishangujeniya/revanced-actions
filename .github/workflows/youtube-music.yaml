@@ -1,4 +1,4 @@
-name: YouTube
+name: YouTube Music
 
 on:
   workflow_dispatch:
@@ -6,11 +6,11 @@ on:
       apk_version:
         description: "APK Version"
         required: true
-        default: "19.16.39"
+        default: "7.20.51"
 
 env:
   REGISTRY: ghcr.io
-  APK: youtube.apk
+  APK: youtube-music.apk
   REVANCED_OPTIONS: revanced-options.json
   REVANCED_CLI: revanced-cli-4.6.0-all.jar
   REVANCED_PATCHES: revanced-patches-4.15.0.jar
@@ -33,7 +33,7 @@ jobs:
         uses: Yakov5776/gh-apkmirror-dl@v1.2
         with:
           org: "google-inc"
-          repo: "youtube"
+          repo: "youtube-music"
           version: ${{ github.event.inputs.apk_version }}
           bundle: false
           filename: ${{ env.APK }}
