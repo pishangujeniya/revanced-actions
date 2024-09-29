@@ -1,0 +1,48 @@
+name: Test
+
+on: workflow_dispatch
+
+env:
+  REGISTRY: ghcr.io
+  APK: youtube.apk
+  REVANCED_OPTIONS: revanced-options.json
+  REVANCED_CLI: revanced-cli-4.6.0-all.jar
+  REVANCED_PATCHES: revanced-patches-4.15.0.jar
+  REVANCED_INTEGRATIONS: revanced-integrations-1.14.2.apk
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: "Get Last commit short SHA"
+        id: "commit_short_sha"
+        run: |
+          echo "LAST_SHORT_COMMIT_SHA=$(echo ${{ github.sha }} | cut -c 1-7)" >> $GITHUB_OUTPUT
+
+      - name: Downloading APK
+        uses: Yakov5776/gh-apkmirror-dl@v1.2
+        with:
+          org: "google-inc"
+          repo: "youtube"
+          version: "19.16.39"
+          bundle: false
+          filename: ${{ env.APK }}
+
+      - name: Set current date as env variable
+        run: echo "date_now=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+      - name: GitHub Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "v1.0.0"
+          draft: true
+          title: "Release ${{ env.date_now }}"
+          files: |
+            ${{ env.APK }}
