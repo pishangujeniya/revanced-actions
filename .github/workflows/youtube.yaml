@@ -65,7 +65,7 @@ jobs:
           distribution: "zulu"
 
       - name: Patching
-        run: java -jar ${{ env.REVANCED_CLI }} patch -m ${{ env.REVANCED_INTEGRATIONS }} -b ${{ env.REVANCED_PATCHES }} --options ${{ env.REVANCED_OPTIONS }} -o patched-${{ env.APK }} ${{ env.APK }} 
+        run: java -jar ${{ env.REVANCED_CLI }} patch -m ${{ env.REVANCED_INTEGRATIONS }} -b ${{ env.REVANCED_PATCHES }} --options ${{ env.REVANCED_OPTIONS }} -o patched-${{ env.APK }} ${{ env.APK }}
 
       - name: Downloading ReVanced GmsCore
         uses: dsaltares/fetch-gh-release-asset@master
@@ -82,7 +82,7 @@ jobs:
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
+          # automatic_release_tag: "latest"
           draft: true
           title: "Release ${{ env.date_now }}"
           files: |
