@@ -78,7 +78,8 @@ jobs:
       - name: Set current date as env variable
         run: echo "date_now=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
-      - uses: marvinpinto/action-automatic-releases@latest
+      - name: GitHub Release
+        uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
