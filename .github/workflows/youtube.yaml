@@ -24,11 +24,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: "Get Last commit short SHA"
-        id: "commit_short_sha"
-        run: |
-          echo "LAST_SHORT_COMMIT_SHA=$(echo ${{ github.sha }} | cut -c 1-7)" >> $GITHUB_OUTPUT
-
       - name: Downloading APK
         uses: Yakov5776/gh-apkmirror-dl@v1.2
         with:
@@ -79,8 +74,9 @@ jobs:
           file: "app.revanced.android.gms-240913008-signed.apk"
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set current date as env variable
-        run: echo "date_now=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date)"
 
       - name: GitHub Release
         uses: marvinpinto/action-automatic-releases@latest
@@ -88,7 +84,7 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           draft: true
-          title: "Release ${{ env.date_now }}"
+          title: "Release ${{ steps.date.outputs.date }}"
           files: |
             patched-${{ env.APK }}
             app.revanced.android.gms-240913008-signed.apk
