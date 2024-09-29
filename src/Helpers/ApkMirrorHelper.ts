@@ -1,12 +1,19 @@
 import axios from 'axios';
 import { exec } from 'child_process';
+import { CookieJar } from 'tough-cookie';
+const { wrapper } = require('axios-cookiejar-support');
+export class ApkMirrorHelper {
 
-export class YouTubeDownloader {
+    public jar = new CookieJar();
+    private axiosClient = wrapper(axios.create({
+        withCredentials: true,
+        // jar: this.jar,
+    }));
 
-    constructor() { }
+    constructor() {
+    }
 
     private readonly USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0';
-    // private readonly USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36";
 
     /**
      * Helper function to make HTTP requests.
@@ -14,9 +21,9 @@ export class YouTubeDownloader {
      * @returns {Promise<string>} - A promise that resolves with the response data.
      */
     private async sendGetRequest(url: string): Promise<string> {
-        const response = await axios.get(url, {
+        const response = await this.axiosClient.get(url, {
             headers: {
-                'User-Agent': this.USER_AGENT
+                'User-Agent': this.USER_AGENT,
             }
         });
         return response.data as string;
@@ -29,12 +36,12 @@ export class YouTubeDownloader {
      */
     private extractHrefs(html: string): string[] {
         const hrefRegex = /href="([^"]*)"/g;
-        const matches = [];
+        const matches = new Set<string>();
         let match;
         while ((match = hrefRegex.exec(html)) !== null) {
-            matches.push(match[1]);
+            matches.add(match[1]);
         }
-        return matches;
+        return Array.from(matches);
     }
 
     /**
@@ -45,7 +52,7 @@ export class YouTubeDownloader {
      */
     private async runWget(url: string, output: string): Promise<void> {
         return new Promise((resolve, reject) => {
-            const command = `wget --header="User-Agent: ${this.USER_AGENT}" -O ${output} ${url}`;
+            const command = `wget -nv -O ${output} --header="User-Agent: ${this.USER_AGENT}" ${url}`;
             console.log(`Running command: ${command}`);
             exec(command, (error, stdout, stderr) => {
                 if (error) {

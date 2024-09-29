@@ -1,0 +1,51 @@
+[
+    {
+        "patchName": "Custom package name",
+        "options": [
+            {
+                "key": "PackageNameYouTube",
+                "value": "yt.rv.renamed"
+            },
+            {
+                "key": "PackageNameYouTubeMusic",
+                "value": "ytm.rv.renamed"
+            }
+        ]
+    },
+    {
+        "patchName": "Settings for YouTube",
+        "options": [
+            {
+                "key": "RVXSettingsMenuName",
+                "value": "ReVanced Settings"
+            }
+        ]
+    },
+    {
+        "patchName": "SponsorBlock",
+        "options": [
+            {
+                "key": "OutlineIcon",
+                "value": true
+            }
+        ]
+    },
+    {
+        "patchName": "Visual preferences icons",
+        "options": [
+            {
+                "key": "RVXSettingsMenuIcon",
+                "value": "extension"
+            }
+        ]
+    },
+    {
+        "patchName": "Settings for YouTube Music",
+        "options": [
+            {
+                "key": "RVXSettingsMenuName",
+                "value": "ReVanced Settings"
+            }
+        ]
+    }
+]
