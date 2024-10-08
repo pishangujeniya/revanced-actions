@@ -12,9 +12,9 @@ env:
   REGISTRY: ghcr.io
   APK: youtube.apk
   REVANCED_OPTIONS: revanced-options.json
-  REVANCED_CLI: revanced-cli-4.6.0-all.jar
-  REVANCED_PATCHES: revanced-patches-4.15.0.jar
-  REVANCED_INTEGRATIONS: revanced-integrations-1.14.2.apk
+  REVANCED_CLI: revanced-cli-5.0.0-dev.5-all.jar
+  REVANCED_PATCHES: revanced-patches-4.17.0-dev.5.jar
+  REVANCED_INTEGRATIONS: revanced-integrations-1.16.0-dev.4.apk
 
 jobs:
   patch:
@@ -37,7 +37,7 @@ jobs:
         uses: dsaltares/fetch-gh-release-asset@master
         with:
           repo: "ReVanced/revanced-cli"
-          version: "tags/v4.6.0"
+          version: "tags/v5.0.0-dev.5"
           file: ${{ env.REVANCED_CLI }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -45,7 +45,7 @@ jobs:
         uses: dsaltares/fetch-gh-release-asset@master
         with:
           repo: "ReVanced/revanced-patches"
-          version: "tags/v4.15.0"
+          version: "tags/v4.17.0-dev.5"
           file: ${{ env.REVANCED_PATCHES }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -53,7 +53,7 @@ jobs:
         uses: dsaltares/fetch-gh-release-asset@master
         with:
           repo: "ReVanced/revanced-integrations"
-          version: "tags/v1.14.2"
+          version: "tags/v1.16.0-dev.4"
           file: ${{ env.REVANCED_INTEGRATIONS }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
